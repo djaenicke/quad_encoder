@@ -5,7 +5,6 @@
 namespace quad_encoder {
 
 static const int8_t lookup_table[] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
-static volatile uint8_t enc_val = 0;
 
 QuadEncoder::QuadEncoder(PinName pin_a, PinMode mode_a, PinName pin_b, PinMode mode_b):
   interrupt_pin_a_(pin_a, mode_a),
@@ -24,9 +23,9 @@ QuadEncoder::QuadEncoder(PinName pin_a, PinMode mode_a, PinName pin_b, PinMode m
 }
 
 void QuadEncoder::PinChangeISR(void) {  
-  enc_val = enc_val << 2;
-  enc_val = enc_val | (interrupt_pin_a_ << 1) | interrupt_pin_b_;
-  pulses_ += lookup_table[enc_val & 0b1111];
+  enc_val_ = enc_val_ << 2;
+  enc_val_ = enc_val_ | (interrupt_pin_a_ << 1) | interrupt_pin_b_;
+  pulses_ += lookup_table[enc_val_ & 0b1111];
 }
 
 int32_t QuadEncoder::GetPulses(void) {

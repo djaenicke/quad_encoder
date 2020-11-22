@@ -14,6 +14,7 @@ class QuadEncoder {
   InterruptIn interrupt_pin_a_;
   InterruptIn interrupt_pin_b_;
   volatile int32_t pulses_;
+  volatile uint8_t enc_val_ = 0;
 
   void PinChangeISR(void);
 };
