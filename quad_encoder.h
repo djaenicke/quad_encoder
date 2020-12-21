@@ -3,12 +3,13 @@
 
 #include "mbed.h"
 
-namespace quad_encoder {
-
-class QuadEncoder {
+namespace quad_encoder
+{
+class QuadEncoder
+{
  public:
   QuadEncoder(PinName pin_a, PinMode mode_a, PinName pin_b, PinMode mode_b);
-  int32_t GetPulses(void);
+  int32_t getPulses(void);
 
  private:
   InterruptIn interrupt_pin_a_;
@@ -16,9 +17,9 @@ class QuadEncoder {
   volatile int32_t pulses_;
   volatile uint8_t enc_val_ = 0;
 
-  void PinChangeISR(void);
+  void pinChangeISR(void);
 };
 
-}   // namespace quad_encoder
+}  // namespace quad_encoder
 
 #endif  // QUAD_ENCODER_H_
